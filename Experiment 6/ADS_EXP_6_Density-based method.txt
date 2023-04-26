@@ -1,0 +1,14 @@
+import numpy as np
+from sklearn.cluster import DBSCAN
+
+# Generate a random dataset with some outliers
+X = np.random.randn(1000, 2)
+X[:10] += 4  # Add outliers
+
+# Use DBSCAN to detect outliers
+clf = DBSCAN(eps=0.5, min_samples=10)
+y_pred = clf.fit_predict(X)
+
+# Print the indices of the outlier samples
+outliers = np.where(y_pred == -1)[0]
+print("Density-based method (DBSCAN) detected {} outliers:\n {}".format(len(outliers), outliers))
